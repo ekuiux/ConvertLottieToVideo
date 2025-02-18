@@ -1,0 +1,1 @@
+cd /Users/ospectre/Downloads/converterOnlineNew/client-react && npm start

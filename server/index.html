@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottie to MP4 Converter</title>
+</head>
+<body>
+    <h1>Upload Lottie JSON to Convert to MP4</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="lottie" accept=".json" required>
+        <button type="submit">Convert</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('lottie', document.querySelector('input[type="file"]').files[0]);
+
+            fetch('http://localhost:3000/convert', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'output.mp4';
+                link.click();
+            })
+            .catch(err => console.error('Error:', err));
+        });
+    </script>
+</body>
+</html>
