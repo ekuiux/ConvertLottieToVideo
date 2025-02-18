@@ -1,11 +1,12 @@
 import React from "react";
 import UploadLottie from "./UploadLottie";
+import { Container } from "@mui/material";
 
 function App() {
   return (
-    <div style={{ textAlign: "left" }}>
+    <Container maxWidth="false" style={{ textAlign: "left" }}>
       <UploadLottie />
-    </div>
+    </Container>
   );
 }
 

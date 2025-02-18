@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { Button, Typography, Container, CircularProgress, Select, MenuItem, FormControl, InputLabel, Snackbar, Alert, LinearProgress, Box, Grid } from "@mui/material"; 
+import UploadLottieLayout from "./UploadLottieLayout";
 import lottie from 'lottie-web';
 
 function UploadLottie() {
@@ -172,103 +172,26 @@ function UploadLottie() {
   };
 
   return (
-    <Container maxWidth="lg" style={{ textAlign: "left", padding: "20px" }}>
-      <Typography variant="h4" gutterBottom>
-        Загрузить Lottie файл
-      </Typography>
-
-      <Grid container spacing={2} alignItems="center" mb={2}>
-        <Grid item>
-          <input
-            key={inputKey}
-            type="file"
-            accept=".json"
-            onChange={handleFileChange}
-            ref={fileInputRef}
-            style={{ display: "none" }}
-          />
-          <Button
-            variant="contained"
-            component="label"
-            color="secondary"
-            onClick={() => fileInputRef.current.click()}
-          >
-            Выбрать файл
-          </Button>
-        </Grid>
-        <Grid item>
-          {file && (
-            <Typography variant="body1">Файл: {file.name}</Typography>
-          )}
-        </Grid>
-        <Grid item>
-          {file && !loading && !isVideoReady && (
-            <FormControl>
-              <InputLabel>Частота кадров (FPS)</InputLabel>
-              <Select
-                value={fps}
-                onChange={(e) => setFps(e.target.value)}
-                label="Частота кадров (FPS)"
-                disabled={isFpsDisabled}
-              >
-                <MenuItem value="auto">По умолчанию (из файла)</MenuItem>
-                <MenuItem value={1}>1 FPS</MenuItem>
-                <MenuItem value={24}>24 FPS</MenuItem>
-                <MenuItem value={30}>30 FPS</MenuItem>
-                <MenuItem value={60}>60 FPS</MenuItem>
-              </Select>
-            </FormControl>
-          )}
-        </Grid>
-        <Grid item>
-          {file && !loading && !isVideoReady && (
-            <Button variant="contained" color="primary" onClick={handleUpload}>
-              Загрузить
-            </Button>
-          )}
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          {file && (
-            <Box ref={lottieContainerRef} sx={{ margin: "20px auto", width: "100%", height: "300px", border: "1px solid #ccc", borderRadius: "8px" }}></Box>
-          )}
-        </Grid>
-        <Grid item xs={6}>
-          {loading ? (
-            <Box sx={{ margin: "20px auto", width: "100%", height: "300px", backgroundColor: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <CircularProgress />
-            </Box>
-          ) : (
-            showVideo && videoUrl && (
-              <video key={videoUrl} controls width="100%" style={{ display: "block", margin: "0 auto", borderRadius: "8px" }}>
-                <source src={videoUrl} type="video/mp4" />
-                Ваш браузер не поддерживает видео.
-              </video>
-            )
-          )}
-        </Grid>
-      </Grid>
-
-      {showVideo && videoUrl && (
-        <Box mt={2} textAlign="center">
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={downloadVideo}
-          >
-            Скачать
-          </Button>
-        </Box>
-      )}
-
-      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
-        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
-    </Container>
+    <UploadLottieLayout
+      file={file}
+      inputKey={inputKey}
+      fileInputRef={fileInputRef}
+      handleFileChange={handleFileChange}
+      fps={fps}
+      setFps={setFps}
+      isFpsDisabled={isFpsDisabled}
+      handleUpload={handleUpload}
+      loading={loading}
+      lottieContainerRef={lottieContainerRef}
+      showVideo={showVideo}
+      videoUrl={videoUrl}
+      downloadVideo={downloadVideo}
+      snackbarOpen={snackbarOpen}
+      handleSnackbarClose={handleSnackbarClose}
+      snackbarMessage={snackbarMessage}
+      snackbarSeverity={snackbarSeverity}
+      isVideoReady={isVideoReady}
+    />
   );
 }
 
