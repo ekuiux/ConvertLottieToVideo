@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import UploadLottieLayout from "./UploadLottieLayout";
-import lottie from 'lottie-web';
+import lottieWeb from 'lottie-web';
 
 function UploadLottie() {
   const [file, setFile] = useState(null);
@@ -15,6 +15,11 @@ function UploadLottie() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [lottieFps, setLottieFps] = useState(null);
+  const [lottieDuration, setLottieDuration] = useState(null);
+  const [videoFps, setVideoFps] = useState(null);
+  const [videoSize, setVideoSize] = useState(null); // Добавляем состояние для размера видео
+  const [videoRenderFps, setVideoRenderFps] = useState(null);
   const fileInputRef = useRef(null);
   const videoCheckTimer = useRef(null);
   const lottieContainerRef = useRef(null);
@@ -25,7 +30,9 @@ function UploadLottie() {
       const reader = new FileReader();
       reader.onload = (event) => {
         const lottieData = JSON.parse(event.target.result);
-        lottie.loadAnimation({
+        setLottieFps(lottieData.fr);
+        setLottieDuration(lottieData.op / lottieData.fr);
+        lottieWeb.loadAnimation({
           container: lottieContainerRef.current,
           renderer: 'svg',
           loop: true,
@@ -59,6 +66,8 @@ function UploadLottie() {
     setIsFpsDisabled(false);
     setIsVideoReady(false);
     setInputKey(Date.now());
+    setLottieFps(null); // Скрываем превью
+    setLottieDuration(null); // Скрываем превью
   };
 
   const handleUpload = async () => {
@@ -70,6 +79,7 @@ function UploadLottie() {
     const formData = new FormData();
     formData.append("lottie", file);
     formData.append("fps", fps === "auto" ? "auto" : fps);
+    setVideoRenderFps(fps === "auto" ? lottieFps : fps); // Устанавливаем FPS рендеринга
 
     setLoading(true);
     setIsFpsDisabled(true);
@@ -115,11 +125,20 @@ function UploadLottie() {
         setLoading(true);
         setIsFpsDisabled(true);
         setIsVideoReady(true);
-  
+
+        // Получаем размер видеофайла
+        const videoResponse = await fetch(videoPath);
+        const videoBlob = await videoResponse.blob();
+        const videoSizeInMB = videoBlob.size / (1024 * 1024);
+        const videoSizeFormatted = videoSizeInMB < 1 ? `${(videoBlob.size / 1024).toFixed(2)} КБ` : `${videoSizeInMB.toFixed(2)} МБ`;
+        setVideoSize(videoSizeFormatted);
+
         setTimeout(() => {
           console.log("🎬 Показываем видео через 1 секунду.");
           setShowVideo(true);
           setLoading(false);
+          setLottieFps(null); // Скрываем превью
+          setLottieDuration(null); // Скрываем превью
   
           setTimeout(() => {
             console.log("⏳ Скрываем видео через 3 минуты.");
@@ -171,28 +190,33 @@ function UploadLottie() {
     setSnackbarOpen(false);
   };
 
-  return (
-    <UploadLottieLayout
-      file={file}
-      inputKey={inputKey}
-      fileInputRef={fileInputRef}
-      handleFileChange={handleFileChange}
-      fps={fps}
-      setFps={setFps}
-      isFpsDisabled={isFpsDisabled}
-      handleUpload={handleUpload}
-      loading={loading}
-      lottieContainerRef={lottieContainerRef}
-      showVideo={showVideo}
-      videoUrl={videoUrl}
-      downloadVideo={downloadVideo}
-      snackbarOpen={snackbarOpen}
-      handleSnackbarClose={handleSnackbarClose}
-      snackbarMessage={snackbarMessage}
-      snackbarSeverity={snackbarSeverity}
-      isVideoReady={isVideoReady}
-    />
-  );
+  const layoutProps = {
+    file,
+    inputKey,
+    fileInputRef,
+    handleFileChange,
+    fps,
+    setFps,
+    isFpsDisabled,
+    handleUpload,
+    loading,
+    lottieContainerRef,
+    showVideo,
+    videoUrl,
+    downloadVideo,
+    snackbarOpen,
+    handleSnackbarClose,
+    snackbarMessage,
+    snackbarSeverity,
+    isVideoReady,
+    lottieFps,
+    lottieDuration,
+    videoFps,
+    videoSize, // Передаем размер видео
+    videoRenderFps, // Передаем FPS рендеринга
+  };
+
+  return <UploadLottieLayout {...layoutProps} />;
 }
 
 export default UploadLottie;

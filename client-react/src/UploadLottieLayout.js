@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Typography, Container, CircularProgress, Select, MenuItem, FormControl, InputLabel, Snackbar, Alert, LinearProgress, Box } from "@mui/material";
-import Grid from '@mui/material/Grid2';
+import { Button, Typography, Container, CircularProgress, Select, MenuItem, FormControl, InputLabel, Snackbar, Alert, Box } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 
 function UploadLottieLayout({
   file,
@@ -20,7 +20,11 @@ function UploadLottieLayout({
   handleSnackbarClose,
   snackbarMessage,
   snackbarSeverity,
-  isVideoReady
+  isVideoReady,
+  lottieFps,
+  lottieDuration,
+  videoSize, // Получаем размер видео
+  videoRenderFps // Получаем FPS рендеринга
 }) {
     return (
         <Container maxWidth={false} disableGutters style={{ height: "100vh", padding: "0" }}>
@@ -78,7 +82,12 @@ function UploadLottieLayout({
             <Grid item xs={12} md={4} style={{ height: "100%", width: "28%" }}>
               <Box sx={{ height: "100%", backgroundColor: 'lightgreen', overflow: 'hidden', padding: "3vh", boxSizing: 'border-box' }}>
                 {file && (
-                  <Box ref={lottieContainerRef} sx={{ width: "100%", height: "auto" }}></Box>
+                  <>
+                    <Box ref={lottieContainerRef} sx={{ width: "100%", height: "auto" }}></Box>
+                    <Typography variant="body2" sx={{ mt: 2 }}>
+                      FPS: {lottieFps}, Длительность: {lottieDuration} сек.
+                    </Typography>
+                  </>
                 )}
               </Box>
             </Grid>
@@ -90,10 +99,15 @@ function UploadLottieLayout({
                   </Box>
                 ) : (
                   showVideo && videoUrl && (
-                    <video key={videoUrl} controls autoPlay loop width="100%" height="auto" style={{ display: "block" }}>
-                      <source src={videoUrl} type="video/mp4" />
-                      Ваш браузер не поддерживает видео.
-                    </video>
+                    <>
+                      <Typography variant="body2" sx={{ mb: 2 }}>
+                      FPS: {videoRenderFps}, Размер: {videoSize}
+                      </Typography>
+                      <video key={videoUrl} controls autoPlay loop width="100%" height="auto" style={{ display: "block" }}>
+                        <source src={videoUrl} type="video/mp4" />
+                        Ваш браузер не поддерживает видео.
+                      </video>
+                    </>
                   )
                 )}
               </Box>
