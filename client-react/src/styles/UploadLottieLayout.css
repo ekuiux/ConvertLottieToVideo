@@ -1,0 +1,150 @@
+.container {
+  height: 100vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.grid-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.grid-item {
+  height: 100%;
+  position: relative;
+}
+
+.box {
+  height: 100%;
+  overflow: hidden;
+  padding: 6vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.box-white {
+  background-color: #FDFEFF;
+}
+
+.box-blue {
+  background-color: #2F63FF;
+}
+
+.box-dark {
+  background-color: #212329;
+}
+
+.box-light {
+  background-color: #E4E5E5;
+}
+
+.box-yellow {
+  background-color: #D0FF13;
+  text-align: center;
+}
+
+.video-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.inner-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.border-box {
+  border: 4px solid #FFF;
+  position: absolute;
+}
+
+.full-size {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.half-height {
+  top: 25%;
+  left: 0;
+  right: 0;
+  bottom: 25%;
+}
+
+.half-width {
+  top: 0;
+  left: 25%;
+  right: 25%;
+  bottom: 0;
+}
+
+.padded-container {
+  padding: 6vh;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes animateHalfHeight {
+  0% {
+    top: 25%;
+    bottom: 25%;
+  }
+  50% {
+    top: 20%;
+    bottom: 20%;
+  }
+  100% {
+    top: 25%;
+    bottom: 25%;
+  }
+}
+
+@keyframes animateHalfWidth {
+  0% {
+    left: 25%;
+    right: 25%;
+  }
+  50% {
+    left: 20%;
+    right: 20%;
+  }
+  100% {
+    left: 25%;
+    right: 25%;
+  }
+}
+
+.half-height.loading {
+  animation: animateHalfHeight 2s infinite;
+}
+
+.half-width.loading {
+  animation: animateHalfWidth 2s infinite;
+  animation-delay: 1s;
+}

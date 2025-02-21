@@ -1,5 +1,5 @@
 import React from "react";
-import UploadLottie from "./UploadLottie";
+import UploadLottie from "./components/UploadLottie";
 
 function App() {
   return (
