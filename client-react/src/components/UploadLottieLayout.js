@@ -26,10 +26,18 @@ function UploadLottieLayout({
   videoRenderFps
 }) {
   const [previewKey, setPreviewKey] = useState(0);
+  const [selectedFileName, setSelectedFileName] = useState("Select File");
 
   const handleNewFileChange = (event) => {
     setPreviewKey(previewKey + 1);
     handleFileChange(event);
+    if (event.target.files.length > 0) {
+      setSelectedFileName(event.target.files[0].name);
+    }
+  };
+
+  const handleFpsChange = (value) => {
+    setFps(value);
   };
 
   return (
@@ -37,7 +45,7 @@ function UploadLottieLayout({
       <div className="grid-container" style={{ height: "64.8%" }}>
         <div className="grid-item" style={{ width: "63.5%" }}>
           <div className="box box-white">
-            <h4>Загрузить Lottie файл</h4>
+            <h4>Convert Lottie to Video</h4>
             <input
               key={inputKey}
               type="file"
@@ -46,28 +54,48 @@ function UploadLottieLayout({
               ref={fileInputRef}
               style={{ display: "none" }}
             />
-            <button onClick={() => fileInputRef.current.click()}>
-              Выбрать файл
+            <button className="upload-button" onClick={() => fileInputRef.current.click()}>
+              {selectedFileName}
+              <div className="icon">+</div>
             </button>
-            {file && <p>Файл: {file.name}</p>}
             {file && !loading && !isVideoReady && (
-              <div>
-                <label>Частота кадров (FPS)</label>
-                <select
-                  value={fps}
-                  onChange={(e) => setFps(e.target.value)}
+              <div className="fps-selector">
+                <label>FPS:</label>
+                <button
+                  className={fps === "auto" ? "selected" : ""}
+                  onClick={() => handleFpsChange("auto")}
                   disabled={isFpsDisabled}
                 >
-                  <option value="auto">По умолчанию (из файла)</option>
-                  <option value={1}>1 FPS</option>
-                  <option value={24}>24 FPS</option>
-                  <option value={30}>30 FPS</option>
-                  <option value={60}>60 FPS</option>
-                </select>
+                  D
+                </button>
+                <button
+                  className={fps === 24 ? "selected" : ""}
+                  onClick={() => handleFpsChange(24)}
+                  disabled={isFpsDisabled}
+                >
+                  24
+                </button>
+                <button
+                  className={fps === 30 ? "selected" : ""}
+                  onClick={() => handleFpsChange(30)}
+                  disabled={isFpsDisabled}
+                >
+                  30
+                </button>
+                <button
+                  className={fps === 60 ? "selected" : ""}
+                  onClick={() => handleFpsChange(60)}
+                  disabled={isFpsDisabled}
+                >
+                  60
+                </button>
               </div>
             )}
             {file && !loading && !isVideoReady && (
-              <button onClick={handleUpload}>Загрузить</button>
+              <button className="convert-button" onClick={handleUpload}>
+                Convert
+                <div className="icon">+</div>
+              </button>
             )}
           </div>
         </div>
@@ -96,7 +124,7 @@ function UploadLottieLayout({
                       style={{ position: "relative", zIndex: 1 }}
                     >
                       <source src={videoUrl} type="video/mp4" />
-                      Ваш браузер не поддерживает видео.
+                      Your browser does not support video. 
                     </video>
                   )
                 )}
@@ -115,7 +143,7 @@ function UploadLottieLayout({
         <div className="grid-item" style={{ width: "36.5%", padding: 0 }}>
           <div className="box box-light" style={{ padding: 0 }}>
             {file && !showVideo && (
-              <p style={{ padding: "3vh" }}>FPS: {lottieFps}, Длительность: {lottieDuration} сек.</p>
+              <p style={{ padding: "3vh" }}>FPS {lottieFps}, Duration {lottieDuration} S</p>
             )}
             {showVideo && videoUrl && (
               <button 
@@ -128,7 +156,7 @@ function UploadLottieLayout({
                 }} 
                 onClick={downloadVideo}
               >
-                Скачать (FPS: {videoRenderFps}, Размер: {videoSize})
+                Download (FPS: {videoRenderFps}, {videoSize})
               </button>
             )}
           </div>
