@@ -60,7 +60,11 @@ function UploadLottieLayout({
               style={{ display: "none" }}
             />
             <div className="controls-container">
-              <button className="upload-button" onClick={() => fileInputRef.current.click()}>
+              <button
+                className="upload-button"
+                onClick={() => fileInputRef.current.click()}
+                style={{ width: selectedFileName !== "Select File" ? "100%" : "auto" }} // Добавлено условие для установки ширины
+              >
                 <span className="text">{selectedFileName}</span> {/* Добавлено обертывание текста в span */}
                 <div className="icon">+</div>
               </button>
