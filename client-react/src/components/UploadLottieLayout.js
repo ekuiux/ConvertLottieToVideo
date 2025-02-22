@@ -40,6 +40,18 @@ function UploadLottieLayout({
     setFps(value);
   };
 
+  const uploadIcon = (
+    <svg width="40%" height="40%" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28.5844 15.5499L16.3311 27.8033C14.83 29.3045 12.794 30.1478 10.6711 30.1478C8.54822 30.1478 6.51226 29.3045 5.01114 27.8033C3.51001 26.3022 2.66669 24.2662 2.66669 22.1433C2.66669 20.0203 3.51001 17.9845 5.01114 16.4833L17.2644 4.22995C18.2652 3.22921 19.6226 2.66699 21.0378 2.66699C22.4531 2.66699 23.8104 3.22921 24.8111 4.22995C25.8119 5.23071 26.3742 6.58802 26.3742 8.00329C26.3742 9.41857 25.8119 10.7759 24.8111 11.7766L12.5445 24.0299C12.0441 24.5303 11.3654 24.8114 10.6578 24.8114C9.95017 24.8114 9.27151 24.5303 8.77114 24.0299C8.27077 23.5295 7.98965 22.851 7.98965 22.1433C7.98965 21.4357 8.27077 20.757 8.77114 20.2566L20.0911 8.94995" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/>
+    </svg>
+  );
+
+  const convertIcon = (
+    <svg width="40%" height="40%" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M23.319 17.9997L1.83356 17.9997L1.83356 13.9997L23.319 13.9997L12.3129 3.05446L15.1335 0.21821L29.5767 14.5816C29.9542 14.957 30.1664 15.4674 30.1664 15.9997C30.1664 16.5321 29.9542 17.0425 29.5767 17.4179L15.1335 31.7812L12.3129 28.945L23.319 17.9997Z" fill="currentColor"/>
+    </svg>
+  );
+
   return (
     <div className="container">
       <div className="grid-container" style={{ height: "64.8%" }}>
@@ -66,7 +78,7 @@ function UploadLottieLayout({
                 style={{ width: selectedFileName !== "Select File" ? "100%" : "auto" }} // Добавлено условие для установки ширины
               >
                 <span className="text">{selectedFileName}</span> {/* Добавлено обертывание текста в span */}
-                <div className="icon">+</div>
+                <div className="icon">{uploadIcon}</div> {/* Заменено на SVG иконку */}
               </button>
               {file && !loading && !isVideoReady && (
                 <div className="fps-selector">
@@ -104,8 +116,8 @@ function UploadLottieLayout({
               )}
               {file && !loading && !isVideoReady && (
                 <button className="convert-button" onClick={handleUpload}>
-                  Convert
-                  <div className="icon">+</div>
+                  <span className="text">Convert</span> {/* Добавлено обертывание текста в span */}
+                  <div className="icon">{convertIcon}</div> {/* Заменено на SVG иконку */}
                 </button>
               )}
             </div>
@@ -152,10 +164,16 @@ function UploadLottieLayout({
         <div className="grid-item" style={{ width: "43.8%" }}>
           <div className="box box-dark"></div>
         </div>
-        <div className="grid-item" style={{ width: "36.5%", padding: 0 }}>
-          <div className="box box-light" style={{ padding: 0 }}>
+        <div className="grid-item" style={{ width: "36.5%"}}>
+          <div className="box box-light">
             {file && !showVideo && (
-              <p style={{ padding: "3vh" }}>FPS {lottieFps}, Duration {lottieDuration} S</p>
+              <>
+                <div className="fps-text">FPS</div>
+                <div className="fps-value">{lottieFps}</div>
+                <div className="decorative-line"></div> {/* Добавлено для декоративного элемента */}
+                <div className="duration-value">{lottieDuration}S</div>
+                <div className="duration-text">Duration</div>
+              </>
             )}
             {showVideo && videoUrl && (
               <button 
@@ -171,12 +189,13 @@ function UploadLottieLayout({
                 Download (FPS: {videoRenderFps}, {videoSize})
               </button>
             )}
+            {!file && (
+              <>
+                <div className="file-text">FILE</div> {/* Обновлено для использования класса */}
+                <div className="info-text">INFO</div> {/* Обновлено для использования класса */}
+              </>
+            )}
           </div>
-        </div>
-      </div>
-      <div className="snackbar">
-        <div className="alert">
-          {snackbarMessage}
         </div>
       </div>
     </div>

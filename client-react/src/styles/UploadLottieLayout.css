@@ -35,6 +35,10 @@ body {
   font-family: var(--font-family);
 }
 
+.grid-container:nth-of-type(2) .box {
+  padding: 3vh; /* Изменено для установки паддинга 3vh */
+}
+
 .grid-item {
   height: 100%;
   position: relative;
@@ -376,4 +380,68 @@ h1 .to {
 
 h1 .video {
   font-weight: 700;
+}
+
+.file-text {
+  position: absolute;
+  top: calc(3vh - 2%); /* Учитывает паддинг родительского блока */
+  left: 3vh;
+  font-size: var(--font-size-responsive); /* Заменено на переменную */
+  font-weight: 100;
+}
+
+.info-text {
+  position: absolute;
+  bottom: calc(3vh - 2%);
+  right: 3vh;
+  font-size: var(--font-size-responsive); /* Заменено на переменную */
+  font-weight: 100;
+}
+
+.fps-text {
+  position: absolute;
+  top: calc(3vh - 2%);
+  left: 3vh;
+  font-size: 5vh;
+  font-weight: 100;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.fps-value {
+  position: absolute;
+  top: calc(6vh - 4%);
+  left: 3vh;
+  font-size: 12vh;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.duration-text {
+  position: absolute;
+  bottom: calc(3vh - 2%);
+  right: 3vh;
+  font-size: 5vh;
+  font-weight: 100;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.duration-value {
+  position: absolute;
+  bottom: calc(6vh - 2%);
+  right: 3vh;
+  font-size: 12vh;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.decorative-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24vh;
+  height: 0.4vh;
+  background-color: var(--color-dark);
+  transform: translate(-50%, -50%) rotate(-45deg); /* Обновлено для центрирования */
 }
