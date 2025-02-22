@@ -130,7 +130,17 @@ function UploadLottie() {
         const videoResponse = await fetch(videoPath);
         const videoBlob = await videoResponse.blob();
         const videoSizeInMB = videoBlob.size / (1024 * 1024);
-        const videoSizeFormatted = videoSizeInMB < 1 ? `${(videoBlob.size / 1024).toFixed(2)} KB` : `${videoSizeInMB.toFixed(2)} MB`;
+        const videoSizeFormatted = videoSizeInMB < 1 ? (
+          <>
+            <span className="video-size-number">{(videoBlob.size / 1024).toFixed(2)}</span>
+            <span className="video-size-unit">KB</span>
+          </>
+        ) : (
+          <>
+            <span className="video-size-number">{videoSizeInMB.toFixed(2)}</span>
+            <span className="video-size-unit">MB</span>
+          </>
+        );
         setVideoSize(videoSizeFormatted);
 
         setTimeout(() => {

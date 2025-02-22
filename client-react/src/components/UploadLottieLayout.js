@@ -15,10 +15,6 @@ function UploadLottieLayout({
   showVideo,
   videoUrl,
   downloadVideo,
-  snackbarOpen,
-  handleSnackbarClose,
-  snackbarMessage,
-  snackbarSeverity,
   isVideoReady,
   lottieFps,
   lottieDuration,
@@ -49,6 +45,12 @@ function UploadLottieLayout({
   const convertIcon = (
     <svg width="40%" height="40%" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M23.319 17.9997L1.83356 17.9997L1.83356 13.9997L23.319 13.9997L12.3129 3.05446L15.1335 0.21821L29.5767 14.5816C29.9542 14.957 30.1664 15.4674 30.1664 15.9997C30.1664 16.5321 29.9542 17.0425 29.5767 17.4179L15.1335 31.7812L12.3129 28.945L23.319 17.9997Z" fill="currentColor"/>
+    </svg>
+  );
+
+  const downloadIcon = (
+    <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28.5844 15.5499L16.3311 27.8033C14.83 29.3045 12.794 30.1478 10.6711 30.1478C8.54822 30.1478 6.51226 29.3045 5.01114 27.8033C3.51001 26.3022 2.66669 24.2662 2.66669 22.1433C2.66669 20.0203 3.51001 17.9845 5.01114 16.4833L17.2644 4.22995C18.2652 3.22921 19.6226 2.66699 21.0378 2.66699C22.4531 2.66699 23.8104 3.22921 24.8111 4.22995C25.8119 5.23071 26.3742 6.58802 26.3742 8.00329C26.3742 9.41857 25.8119 10.7759 24.8111 11.7766L12.5445 24.0299C12.0441 24.5303 11.3654 24.8114 10.6578 24.8114C9.95017 24.8114 9.27151 24.5303 8.77114 24.0299C8.27077 23.5295 7.98965 22.851 7.98965 22.1433C7.98965 21.4357 8.27077 20.757 8.77114 20.2566L20.0911 8.94995" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/>
     </svg>
   );
 
@@ -164,8 +166,8 @@ function UploadLottieLayout({
         <div className="grid-item" style={{ width: "43.8%" }}>
           <div className="box box-dark"></div>
         </div>
-        <div className="grid-item" style={{ width: "36.5%"}}>
-          <div className="box box-light">
+        <div className="grid-item" style={{ width: "36.5%", padding: 0 }}>
+          <div className="box box-light" style={{ padding: 0 }}>
             {file && !showVideo && (
               <>
                 <div className="fps-text">FPS</div>
@@ -177,16 +179,16 @@ function UploadLottieLayout({
             )}
             {showVideo && videoUrl && (
               <button 
-                style={{ 
-                  backgroundColor: "#D0FF13", 
-                  width: "100%", 
-                  height: "100%", 
-                  border: "none", 
-                  boxSizing: "border-box" 
-                }} 
+                className="download-button" 
                 onClick={downloadVideo}
               >
-                Download (FPS: {videoRenderFps}, {videoSize})
+                <div className="download-text">
+                  <div>
+                    <span className="number">{videoRenderFps}</span><span>FPS</span> <span className="slash">/</span> <span className="number">{videoSize}</span>
+                  </div>
+                  <div>DOWNLOAD</div>
+                </div>
+                <div className="download-icon">{downloadIcon}</div>
               </button>
             )}
             {!file && (

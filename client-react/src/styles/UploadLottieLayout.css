@@ -39,6 +39,10 @@ body {
   padding: 3vh; /* Изменено для установки паддинга 3vh */
 }
 
+.grid-container:nth-of-type(2) .box-light {
+  color: var(--color-dark); /* Установить черный цвет для текста и элементов */
+}
+
 .grid-item {
   height: 100%;
   position: relative;
@@ -444,4 +448,66 @@ h1 .video {
   height: 0.4vh;
   background-color: var(--color-dark);
   transform: translate(-50%, -50%) rotate(-45deg); /* Обновлено для центрирования */
+}
+
+.download-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-yellow);
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3vh; /* Учитывает паддинги 5 блока */
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.download-text {
+  color: var(--color-dark);
+  position: absolute;
+  bottom: calc(3vh - 2%); /* Учитывает паддинги 5 блока */
+  left: 3vh; /* Учитывает паддинги 5 блока */
+  text-align: left; /* Прижать текст к левой стороне */
+}
+
+.download-text div:first-child {
+  font-size: 5vh; /* Размер текста для FPS и веса */
+}
+
+.download-text div:first-child span {
+  font-weight: 100; /* Вес шрифта для текста */
+}
+
+.download-text div:first-child .number {
+  font-weight: 400; /* Вес шрифта для цифр */
+}
+
+.download-text div:first-child .slash {
+  font-weight: 100; /* Вес шрифта для символа / */
+}
+
+.download-text div:last-child {
+  font-size: 10vh; /* Размер текста для DOWNLOAD */
+  font-weight: 500;
+}
+
+.download-icon {
+  position: absolute;
+  top: 3vh; /* Учитывает паддинги 5 блока */
+  right: 3vh; /* Учитывает паддинги 5 блока */
+  width: 4vw;
+  height: 4vw;
+  color: var(--color-dark);
+}
+
+.video-size-number {
+  font-weight: 400 !important; /* Добавлено !important для приоритета */
+}
+
+.video-size-unit {
+  font-weight: 100 !important; /* Добавлено !important для приоритета */
 }
