@@ -51,6 +51,9 @@ body {
 
 .box-white {
   background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .box-blue {
@@ -140,9 +143,26 @@ body {
   border: none;
   background: none;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 500;
   font-family: var(--font-family);
+  text-transform: uppercase;
+  padding: 0;
+  width: 100%; /* Ширина кнопок во всю ширину родительского блока */
+  justify-content: space-between; /* Обновлено для выравнивания текста по левой стороне и иконки по правой */
+  overflow: hidden; /* Добавлено для обрезки текста */
+  text-overflow: ellipsis; /* Добавлено для многоточия */
+  white-space: nowrap; /* Добавлено для предотвращения переноса текста */
+  max-width: 360px;
+}
+
+.upload-button .text,
+.convert-button .text {
+  overflow: hidden; /* Добавлено для обрезки текста */
+  text-overflow: ellipsis; /* Добавлено для многоточия */
+  white-space: nowrap; /* Добавлено для предотвращения переноса текста */
+  flex-grow: 1; /* Добавлено для заполнения оставшегося пространства */
+  text-align: left; /* Добавлено для выравнивания текста по левой стороне */
 }
 
 .upload-button .icon,
@@ -150,11 +170,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 60px;
+  height: 60px;
   background-color: var(--color-dark);
   color: var(--color-white);
-  margin-left: 8px;
+  margin-left: 30px; /* Убираем отступ слева */
+  margin-right: 0; /* Убираем отступ справа */
+  padding: 0;
+  flex-shrink: 0; /* Добавлено для предотвращения изменения размеров иконки */
 }
 
 .convert-button {
@@ -170,10 +193,15 @@ body {
   align-items: center;
   gap: 10px;
   font-family: var(--font-family);
+  width: 100%;
+  min-width: 360px;
+  justify-content: space-between
 }
 
 .fps-selector label {
-  font-weight: bold;
+  font-weight: 100;
+  font-size: 28px;
+  padding-right: 7px;
 }
 
 .fps-selector button {
@@ -181,15 +209,67 @@ body {
   border: none;
   cursor: pointer;
   padding: 5px 10px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 100;
   color: var(--color-dark);
   font-family: var(--font-family);
+  text-transform: uppercase;
+  width: 60px; /* Фиксированная ширина для кнопок */
 }
 
 .fps-selector button.selected {
-  background-color: var(--color-blue);
+  font-weight: 500; /* Одинаковый вес шрифта для всех состояний */
+}
+
+.fps-selector button[title] {
+  position: relative;
+}
+
+.fps-selector button[title]::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-dark);
   color: var(--color-white);
+  padding: 5px 10px;
+  border-radius: 0px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-size: 12px;
+}
+
+.fps-selector button[title]:hover::after {
+  opacity: 1;
+}
+
+.fps-selector button[data-tooltip] {
+  position: relative;
+}
+
+.fps-selector button[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  padding: 5px 10px;
+  border-radius: 0px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-size: 12px;
+  font-weight: 500; /* Добавлено для установки веса шрифта */
+}
+
+.fps-selector button[data-tooltip]:hover::after {
+  opacity: 1;
 }
 
 @keyframes animateHalfHeight {
@@ -229,4 +309,49 @@ body {
 .half-width.loading {
   animation: animateHalfWidth 2s infinite;
   animation-delay: 1s;
+}
+
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-top: auto;
+  margin-left: auto;
+}
+
+h1 {
+  font-size: clamp(27px, min(8.6vw, 15.5vh), 168px);
+  white-space: pre-line;
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 90%;
+  position: absolute;
+  top: calc(5vh - 2%); /* Учитывает паддинг родительского блока */
+  left: 5vh; /* Учитывает паддинг родительского блока */
+  max-width: calc(100% - 10vh); /* Учитывает паддинг родительского блока */
+  max-height: calc(100% - 10vh); /* Учитывает паддинг родительского блока */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-dark);
+}
+
+h1 span {
+  display: block;
+}
+
+h1 .convert {
+  font-weight: 100;
+}
+
+h1 .lottie {
+  font-weight: 300;
+}
+
+h1 .to {
+  font-weight: 500;
+}
+
+h1 .video {
+  font-weight: 700;
 }

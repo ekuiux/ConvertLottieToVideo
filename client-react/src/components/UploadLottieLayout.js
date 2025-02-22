@@ -45,7 +45,12 @@ function UploadLottieLayout({
       <div className="grid-container" style={{ height: "64.8%" }}>
         <div className="grid-item" style={{ width: "63.5%" }}>
           <div className="box box-white">
-            <h4>Convert Lottie to Video</h4>
+            <h1>
+              <span className="convert">Convert</span>
+              <span className="lottie">Lottie</span>
+              <span className="to">to</span>
+              <span className="video">Video</span>
+            </h1>
             <input
               key={inputKey}
               type="file"
@@ -54,49 +59,52 @@ function UploadLottieLayout({
               ref={fileInputRef}
               style={{ display: "none" }}
             />
-            <button className="upload-button" onClick={() => fileInputRef.current.click()}>
-              {selectedFileName}
-              <div className="icon">+</div>
-            </button>
-            {file && !loading && !isVideoReady && (
-              <div className="fps-selector">
-                <label>FPS:</label>
-                <button
-                  className={fps === "auto" ? "selected" : ""}
-                  onClick={() => handleFpsChange("auto")}
-                  disabled={isFpsDisabled}
-                >
-                  D
-                </button>
-                <button
-                  className={fps === 24 ? "selected" : ""}
-                  onClick={() => handleFpsChange(24)}
-                  disabled={isFpsDisabled}
-                >
-                  24
-                </button>
-                <button
-                  className={fps === 30 ? "selected" : ""}
-                  onClick={() => handleFpsChange(30)}
-                  disabled={isFpsDisabled}
-                >
-                  30
-                </button>
-                <button
-                  className={fps === 60 ? "selected" : ""}
-                  onClick={() => handleFpsChange(60)}
-                  disabled={isFpsDisabled}
-                >
-                  60
-                </button>
-              </div>
-            )}
-            {file && !loading && !isVideoReady && (
-              <button className="convert-button" onClick={handleUpload}>
-                Convert
+            <div className="controls-container">
+              <button className="upload-button" onClick={() => fileInputRef.current.click()}>
+                <span className="text">{selectedFileName}</span> {/* Добавлено обертывание текста в span */}
                 <div className="icon">+</div>
               </button>
-            )}
+              {file && !loading && !isVideoReady && (
+                <div className="fps-selector">
+                  <label>FPS:</label>
+                  <button
+                    className={fps === "auto" ? "selected" : ""}
+                    onClick={() => handleFpsChange("auto")}
+                    disabled={isFpsDisabled}
+                    data-tooltip="Default (from file)" // Добавлено для кастомного тултипа
+                  >
+                    D
+                  </button>
+                  <button
+                    className={fps === 24 ? "selected" : ""}
+                    onClick={() => handleFpsChange(24)}
+                    disabled={isFpsDisabled}
+                  >
+                    24
+                  </button>
+                  <button
+                    className={fps === 30 ? "selected" : ""}
+                    onClick={() => handleFpsChange(30)}
+                    disabled={isFpsDisabled}
+                  >
+                    30
+                  </button>
+                  <button
+                    className={fps === 60 ? "selected" : ""}
+                    onClick={() => handleFpsChange(60)}
+                    disabled={isFpsDisabled}
+                  >
+                    60
+                  </button>
+                </div>
+              )}
+              {file && !loading && !isVideoReady && (
+                <button className="convert-button" onClick={handleUpload}>
+                  Convert
+                  <div className="icon">+</div>
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="grid-item" style={{ width: "36.5%" }}>
@@ -124,7 +132,7 @@ function UploadLottieLayout({
                       style={{ position: "relative", zIndex: 1 }}
                     >
                       <source src={videoUrl} type="video/mp4" />
-                      Your browser does not support video. 
+                      Your browser does not support video.
                     </video>
                   )
                 )}
