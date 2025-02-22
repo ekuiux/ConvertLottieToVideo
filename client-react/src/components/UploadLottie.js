@@ -24,6 +24,8 @@ function UploadLottie() {
   const videoCheckTimer = useRef(null);
   const lottieContainerRef = useRef(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
+  const [previewKey, setPreviewKey] = useState(0);
+  const [selectedFileName, setSelectedFileName] = useState("Select File");
 
   useEffect(() => {
     if (file) {
@@ -43,6 +45,18 @@ function UploadLottie() {
       reader.readAsText(file);
     }
   }, [file]);
+
+  const handleNewFileChange = (event) => {
+    setPreviewKey(previewKey + 1);
+    handleFileChange(event);
+    if (event.target.files.length > 0) {
+      setSelectedFileName(event.target.files[0].name);
+    }
+  };
+
+  const handleFpsChange = (value) => {
+    setFps(value);
+  };
 
   const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
@@ -151,9 +165,11 @@ function UploadLottie() {
           setLottieDuration(null); // Скрываем превью
   
           setTimeout(() => {
-            console.log("⏳ Скрываем видео через 3 минуты.");
+            console.log("⏳ Скрываем видео через 5 минут.");
             setShowVideo(false);
-          }, 3 * 60 * 1000);
+            setFile(null); // Возвращаем элементы в изначальное состояние
+            setSelectedFileName("Select File"); // Возвращаем текст кнопки выбора файла
+          }, 5 * 60 * 1000);
           
         }, 2000);
   
@@ -224,6 +240,10 @@ function UploadLottie() {
     videoFps,
     videoSize, // Передаем размер видео
     videoRenderFps, // Передаем FPS рендеринга
+    previewKey,
+    selectedFileName,
+    handleNewFileChange,
+    handleFpsChange
   };
 
   return <UploadLottieLayout {...layoutProps} />;

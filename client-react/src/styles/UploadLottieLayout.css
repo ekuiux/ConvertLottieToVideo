@@ -47,6 +47,8 @@ body {
   height: 100%;
   position: relative;
   font-family: var(--font-family);
+  text-decoration: none; /* Добавлено для удаления подчеркивания у ссылок */
+  color: inherit; /* Добавлено для наследования цвета текста */
 }
 
 .box {
@@ -469,13 +471,15 @@ h1 .video {
 .download-text {
   color: var(--color-dark);
   position: absolute;
-  bottom: calc(3vh - 2%); /* Учитывает паддинги 5 блока */
-  left: 3vh; /* Учитывает паддинги 5 блока */
+  bottom: calc(3vh - 5%); /* Учитывает паддинги 5 блока */
+  left: calc(3vh - 1%); /* Учитывает паддинги 5 блока */
   text-align: left; /* Прижать текст к левой стороне */
 }
 
 .download-text div:first-child {
+  padding-left: 0.5%;
   font-size: 5vh; /* Размер текста для FPS и веса */
+  margin-bottom: -1vh; /* Сокращение расстояния между текстом FPS/вес и DOWNLOAD */
 }
 
 .download-text div:first-child span {
@@ -499,9 +503,13 @@ h1 .video {
   position: absolute;
   top: 3vh; /* Учитывает паддинги 5 блока */
   right: 3vh; /* Учитывает паддинги 5 блока */
-  width: 4vw;
-  height: 4vw;
+  width: 2.5vw;
+  height: 2.5vw;
   color: var(--color-dark);
+}
+
+.download-button:hover .download-text div:last-child {
+  color: var(--color-blue); /* Изменение цвета текста и иконки на синий при наведении */
 }
 
 .video-size-number {
@@ -510,4 +518,79 @@ h1 .video {
 
 .video-size-unit {
   font-weight: 100 !important; /* Добавлено !important для приоритета */
+}
+
+.link-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto; /* Высота зависит от внутренних объектов */
+  box-sizing: border-box;
+}
+
+.link-text {
+  text-align: left;
+  font-size: 2vh;
+  color: var(--color-white);
+  font-weight: 100;
+}
+
+.link-icon {
+  text-align: right;
+  font-size: var(--font-size-responsive);
+  color: var(--color-white);
+  width: 2.5vw;
+  height: 2.5vw;
+}
+
+.link-second-text {
+  color: var(--color-white);
+  font-size: 2.5vh;
+  font-weight: 100;
+  position: absolute;
+  bottom: 3vh;
+  left: 3vh;
+}
+
+.link-second-text span {
+  display: block; /* Добавлено для корректного применения отступов */
+  font-weight: 500;
+  font-size: 5vh;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 0.5vh; /* Увеличьте значение для большего расстояния */
+}
+
+a:hover .link-second-text span {
+  color: var(--color-yellow); /* Добавлено для изменения цвета текста при наведении на всю ссылку */
+}
+
+.dribbble-text {
+  position: absolute;
+  bottom: 2vh;
+  left: -6vh;
+  font-size: 22vh; /* Настройте размер текста по вашему усмотрению */
+  color: var(--color-white); /* Полупрозрачный цвет для декоративного элемента */
+  opacity: 0.02;
+  pointer-events: none; /* Отключите взаимодействие с элементом */
+}
+
+.dark-box-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2vh; /* Настройте отступ по вашему усмотрению */
+}
+
+.dark-box-image {
+  width: 20%; /* Настройте ширину изображения по вашему усмотрению */
+  height: auto;
+}
+
+.dark-box-text {
+  width: 75%; /* Настройте ширину текста по вашему усмотрению */
+  color: var(--color-white);
+  font-size: var(--font-size-responsive);
+  margin-left: 2vh; /* Настройте отступ по вашему усмотрению */
 }

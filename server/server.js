@@ -100,13 +100,13 @@ app.get('/output/:videoFile', (req, res) => {
   
   res.sendFile(videoPath, (err) => {
     if (!err) {
-      console.log(`Видео ${req.params.videoFile} скачано, запущено удаление через 3 минуты`);
+      console.log(`Видео ${req.params.videoFile} скачано, запущено удаление через 5 минуты`);
       setTimeout(() => {
         if (fs.existsSync(videoPath)) {
           fs.unlinkSync(videoPath);
           console.log(`Видео ${req.params.videoFile} удалено.`);
         }
-      }, 3 * 60 * 1000);
+      }, 5 * 60 * 1000);
     }
   });
 });
