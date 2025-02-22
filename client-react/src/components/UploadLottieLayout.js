@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/UploadLottieLayout.css";
+import imgLogo from '../styles/img/logo.jpg';
 
 function UploadLottieLayout({
   file,
@@ -172,16 +173,19 @@ function UploadLottieLayout({
             </div>
           </div>
         </a>
-        <a href="#" target="blank" className="grid-item" style={{ width: "43.8%" }}>
+        <a href="https://dribbble.com/EugeneKosinski" target="blank" className="grid-item" style={{ width: "43.8%" }}>
           <div className="box box-dark">
             <div className="link-content">
-              <div className="link-text">Dasdas.com</div>
+              <div className="link-text">dribbble.com/eugenekosinski</div>
               <div className="link-icon">{linkIcon}</div>
             </div>
             <div className="dribbble-text">Dribbble</div> {/* Добавлено для декоративного элемента */}
             <div className="dark-box-content">
-              <img src="../styles/img/logo.jpg" alt="Image" className="dark-box-image" />
-              <div className="dark-box-text">Some text here</div>
+              <img src={imgLogo} alt="Image" className="dark-box-image" />
+              <div className="dark-box-text">
+                <h5>Eugene Kosinski</h5>
+                Mobile Design, UI / Visual Design, UX Design / Research
+              </div>
             </div>
           </div>
         </a>

@@ -568,8 +568,8 @@ a:hover .link-second-text span {
 
 .dribbble-text {
   position: absolute;
-  bottom: 2vh;
-  left: -6vh;
+  bottom: 4vh;
+  left: -4vh;
   font-size: 22vh; /* Настройте размер текста по вашему усмотрению */
   color: var(--color-white); /* Полупрозрачный цвет для декоративного элемента */
   opacity: 0.02;
@@ -577,20 +577,36 @@ a:hover .link-second-text span {
 }
 
 .dark-box-content {
+  position: absolute;
+  bottom: 3vh;
+  left: 3vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 2vh; /* Настройте отступ по вашему усмотрению */
+  justify-content: start;
+  gap: 3vh;
 }
 
 .dark-box-image {
-  width: 20%; /* Настройте ширину изображения по вашему усмотрению */
+  width: 14vh;
   height: auto;
 }
 
 .dark-box-text {
-  width: 75%; /* Настройте ширину текста по вашему усмотрению */
+  width: 50%; /* Настройте ширину текста по вашему усмотрению */
   color: var(--color-white);
-  font-size: var(--font-size-responsive);
-  margin-left: 2vh; /* Настройте отступ по вашему усмотрению */
+  font-size: 2vh;
+  font-weight: 200;
+}
+
+.dark-box-text h5 {
+  font-weight: 500;
+  font-size: 2.5vh;
+  margin-bottom: 2vh;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+.box-dark:hover .dribbble-text {
+  opacity: 0.1;
+  color: var(--color-blue);
 }
