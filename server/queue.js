@@ -9,7 +9,7 @@ const path = require('path');
 //});
 
 const converionQueue = new Queue('conversionQueue', {
-  redis: { host: 'process.env.redis://red-cutju4tumphs73cj4nr0', port: 6379 }
+  redis: { host: process.env.REDIS_HOST, port: 6379 }
 });
 
 let currentJob = null;
