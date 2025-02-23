@@ -10,7 +10,7 @@ const path = require('path');
 
 const videoQueue = new Queue('videoQueue', {
   redis: {
-    host: 'red-cXXXXXXXXXXXXX', // Замени на свой хост
+    host: 'redis://red-cutju4tumphs73cj4nr0:6379', // Замени на свой хост
     port: 6379,
   }
 });
