@@ -8,11 +8,8 @@ const path = require('path');
 //    redis: { host: '127.0.0.1', port: 6379 }
 //});
 
-const videoQueue = new Queue('videoQueue', {
-  redis: {
-    host: 'redis://red-cutju4tumphs73cj4nr0', // Замени на свой хост
-    port: 6379,
-  }
+const videoQueue = new Queue('conversionQueue', {
+  redis: { host: 'process.env.redis://red-cutju4tumphs73cj4nr0', port: 6379 }
 });
 
 let currentJob = null;
