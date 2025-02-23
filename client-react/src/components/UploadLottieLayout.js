@@ -133,12 +133,12 @@ function UploadLottieLayout({
               <div className={`border-box full-size ${loading ? 'loading' : ''}`}></div>
               <div className={`border-box half-height ${loading ? 'loading' : ''}`}></div>
               <div className={`border-box half-width ${loading ? 'loading' : ''}`}></div>
-              <div className="padded-container" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <div className="padded-container" style={{ width: "min(32vw, 52vh)", height: "min(32vw, 52vh)", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 1, aspectRatio: "1 / 1" }}>
                 {file && !loading && !isVideoReady && (
-                  <div key={previewKey} ref={lottieContainerRef} style={{ position: "relative", zIndex: 1 }}></div>
+                  <div key={previewKey} ref={lottieContainerRef} style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 1 }}></div>
                 )}
                 {loading ? (
-                  <div className="video-container" style={{ position: "relative", zIndex: 1 }}>
+                  <div className="video-container" style={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 1 }}>
                     <div className="circular-progress"></div>
                   </div>
                 ) : (

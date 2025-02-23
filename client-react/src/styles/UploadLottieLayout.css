@@ -16,6 +16,8 @@ body {
   --color-border: #FDFEFF;
   --font-family: 'Nebulica', sans-serif;
   --font-size-responsive: clamp(16px, 2.1vw, 28px); /* Добавлено для размера шрифта */
+  user-select: none; /* Добавлено для предотвращения выделения текста */
+  cursor: default; /* Добавлено для предотвращения изменения курсора */
 }
 
 .container {
