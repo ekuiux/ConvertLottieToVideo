@@ -4,8 +4,16 @@ const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs-extra');
 const path = require('path');
 
-const conversionQueue = new Queue('lottie-conversion', {
-    redis: { host: '127.0.0.1', port: 6379 }
+//const conversionQueue = new Queue('lottie-conversion', {
+//    redis: { host: '127.0.0.1', port: 6379 }
+//});
+
+const videoQueue = new Queue('videoQueue', {
+  redis: {
+    host: 'red-cXXXXXXXXXXXXX', // Замени на свой хост
+    port: 6379,
+    password: 'твой_пароль_если_есть' // Если пароль не указан, удали эту строку
+  }
 });
 
 let currentJob = null;
