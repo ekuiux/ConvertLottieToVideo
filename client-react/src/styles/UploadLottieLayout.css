@@ -302,31 +302,31 @@ body {
 
 @keyframes animateHalfHeight {
   0% {
-    top: 25%;
-    bottom: 25%;
+    top: 30%;
+    bottom: 30%;
   }
   50% {
     top: 20%;
     bottom: 20%;
   }
   100% {
-    top: 25%;
-    bottom: 25%;
+    top: 30%;
+    bottom: 30%;
   }
 }
 
 @keyframes animateHalfWidth {
   0% {
-    left: 25%;
-    right: 25%;
+    left: 30%;
+    right: 30%;
   }
   50% {
     left: 20%;
     right: 20%;
   }
   100% {
-    left: 25%;
-    right: 25%;
+    left: 30%;
+    right: 30%;
   }
 }
 
@@ -392,7 +392,7 @@ h1 .video {
   position: absolute;
   top: calc(3vh - 2%); /* Учитывает паддинг родительского блока */
   left: 3vh;
-  font-size: var(--font-size-responsive); /* Заменено на переменную */
+  font-size: min(1.56vw, 3.6vh);
   font-weight: 100;
 }
 
@@ -400,7 +400,7 @@ h1 .video {
   position: absolute;
   bottom: calc(3vh - 2%);
   right: 3vh;
-  font-size: var(--font-size-responsive); /* Заменено на переменную */
+  font-size: min(1.56vw, 3.6vh);
   font-weight: 100;
 }
 
@@ -408,7 +408,7 @@ h1 .video {
   position: absolute;
   top: calc(3vh - 2%);
   left: 3vh;
-  font-size: 5vh;
+  font-size: min(2.6vw, 6vh);
   font-weight: 100;
   line-height: 1;
   text-transform: uppercase;
@@ -418,7 +418,7 @@ h1 .video {
   position: absolute;
   top: calc(6vh - 4%);
   left: 3vh;
-  font-size: 12vh;
+  font-size: min(6.5vw, 15vh);
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -427,7 +427,7 @@ h1 .video {
   position: absolute;
   bottom: calc(3vh - 2%);
   right: 3vh;
-  font-size: 5vh;
+  font-size: min(2.6vw, 6vh);
   font-weight: 100;
   line-height: 1;
   text-transform: uppercase;
@@ -437,7 +437,7 @@ h1 .video {
   position: absolute;
   bottom: calc(6vh - 2%);
   right: 3vh;
-  font-size: 12vh;
+  font-size: min(6.5vw, 15vh);
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -474,11 +474,13 @@ h1 .video {
   bottom: calc(3vh - 5%); /* Учитывает паддинги 5 блока */
   left: calc(3vh - 1%); /* Учитывает паддинги 5 блока */
   text-align: left; /* Прижать текст к левой стороне */
+  transform-origin: bottom left;
+  transition: transform 0.2s;
 }
 
 .download-text div:first-child {
   padding-left: 0.5%;
-  font-size: 5vh; /* Размер текста для FPS и веса */
+  font-size: min(2.6vw, 6vh); /* Размер текста для FPS и веса */
   margin-bottom: -1vh; /* Сокращение расстояния между текстом FPS/вес и DOWNLOAD */
 }
 
@@ -495,7 +497,7 @@ h1 .video {
 }
 
 .download-text div:last-child {
-  font-size: 10vh; /* Размер текста для DOWNLOAD */
+  font-size: min(5.2vw, 12vh);
   font-weight: 500;
 }
 
@@ -503,8 +505,8 @@ h1 .video {
   position: absolute;
   top: 3vh; /* Учитывает паддинги 5 блока */
   right: 3vh; /* Учитывает паддинги 5 блока */
-  width: 2.5vw;
-  height: 2.5vw;
+  width: min(2.5vw, 6vh); 
+  height: min(2.5vw, 6vh); 
   color: var(--color-dark);
 }
 
@@ -531,7 +533,7 @@ h1 .video {
 
 .link-text {
   text-align: left;
-  font-size: 2vh;
+  font-size: min(1.04vw, 2.4vh);
   color: var(--color-white);
   font-weight: 100;
 }
@@ -540,23 +542,25 @@ h1 .video {
   text-align: right;
   font-size: var(--font-size-responsive);
   color: var(--color-white);
-  width: 2.5vw;
-  height: 2.5vw;
+  width: min(2.5vw, 6vh); 
+  height: min(2.5vw, 6vh); 
 }
 
 .link-second-text {
   color: var(--color-white);
-  font-size: 2.5vh;
+  font-size: min(1.3vw, 3vh);
   font-weight: 100;
   position: absolute;
   bottom: 3vh;
   left: 3vh;
+  transform-origin: bottom left;
+  transition: transform 0.2s;
 }
 
 .link-second-text span {
   display: block; /* Добавлено для корректного применения отступов */
   font-weight: 500;
-  font-size: 5vh;
+  font-size: min(2.6vw, 6vh);
   text-transform: uppercase;
   line-height: 1;
   margin-top: 0.5vh; /* Увеличьте значение для большего расстояния */
@@ -584,29 +588,54 @@ a:hover .link-second-text span {
   align-items: center;
   justify-content: start;
   gap: 3vh;
+  transform-origin: bottom left;
+  transition: transform 0.2s;
 }
 
 .dark-box-image {
-  width: 14vh;
-  height: auto;
+  width: min(7.8vw, 18vh);
+  height: min(7.8vw, 18vh);
 }
 
 .dark-box-text {
   width: 50%; /* Настройте ширину текста по вашему усмотрению */
   color: var(--color-white);
-  font-size: 2vh;
+  font-size: min(1.04vw, 2.4vh);
   font-weight: 200;
 }
 
 .dark-box-text h5 {
   font-weight: 500;
-  font-size: 2.5vh;
+  font-size: min(1.3vw, 3vh);
   margin-bottom: 2vh;
   margin-top: 0;
   text-transform: uppercase;
 }
 
+/*
 .box-dark:hover .dribbble-text {
   opacity: 0.1;
   color: var(--color-blue);
+}
+*/
+
+a:hover .dark-box-content, a:hover .link-second-text, .download-button:hover .download-text {
+  transform: scale(1.1);
+  transform-origin: bottom left;
+  transition: transform 0.2s;
+}
+
+.upload-button:hover .icon,
+.convert-button:hover .icon,
+.fps-selector button:hover,
+.fps-selector button[title]:hover::after,
+.fps-selector button[data-tooltip]:hover::after,
+.download-button:hover .download-text div:last-child,
+a:hover .link-second-text span {
+  transition: 0.2s;
+}
+
+.download-text:hover,
+.link-second-text:hover {
+  transition: color 0.2s;
 }

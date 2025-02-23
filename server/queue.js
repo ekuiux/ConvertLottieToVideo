@@ -148,7 +148,7 @@ conversionQueue.process(2, async (job) => {
                             fs.unlinkSync(videoPath);
                             console.log(`Видео ${videoPath} удалено.`);
                         }
-                    }, 3 * 60 * 1000);
+                    }, 5 * 60 * 1000);
                     
                     fs.removeSync(framesDir);
                     fs.unlinkSync(jsonPath);
