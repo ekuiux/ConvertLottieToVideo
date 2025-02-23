@@ -6,7 +6,13 @@ const fs = require('fs');
 const { addConversionTask, conversionQueue, cancelCurrentJob } = require('./queue');
 
 const app = express();
-const port = 5001;
+// const port = 5001;
+
+const port = process.env.PORT || 5001;
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+});
+
 const upload = multer({ 
   dest: 'uploads/', 
   fileFilter: (req, file, cb) => {
