@@ -67,7 +67,7 @@ function UploadLottie() {
     }
   
     try {
-      await axios.post("http://localhost:5001/cancel");
+      await axios.post("https://cltv-client.onrender.com/cancel");
       console.log("⛔ Предыдущая обработка отменена");
     } catch (error) {
       console.error("Ошибка при отмене обработки:", error);
@@ -99,7 +99,7 @@ function UploadLottie() {
     setIsFpsDisabled(true);
 
     try {
-      const response = await axios.post("http://localhost:5001/convert", formData, {
+      const response = await axios.post("https://cltv-client.onrender.com/convert", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
@@ -127,7 +127,7 @@ function UploadLottie() {
     }
   
     const maxAttempts = 50;
-    const videoPath = `http://localhost:5001/output/${videoFileName}?nocache=${Date.now()}`;
+    const videoPath = `https://cltv-client.onrender.com/output/${videoFileName}?nocache=${Date.now()}`;
   
     console.log(`🔍 Проверяем видео (попытка #${attempts + 1}/${maxAttempts})`);
   
