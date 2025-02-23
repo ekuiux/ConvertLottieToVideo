@@ -6,12 +6,7 @@ const fs = require('fs');
 const { addConversionTask, conversionQueue, cancelCurrentJob } = require('./queue');
 
 const app = express();
-// const port = 5001;
-
-const port = process.env.PORT || 5001;
-app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5001; // ✅ Используем переменную окружения
 
 const upload = multer({ 
   dest: 'uploads/', 
@@ -32,9 +27,7 @@ app.use('/output', express.static(outputDir));
 
 app.post('/cancel', async (req, res) => {
   try {
-      cancelCurrentJob(); // Теперь просто вызываем функцию отмены
-
-      // Чистим всю очередь
+      cancelCurrentJob();
       await conversionQueue.clean(0, 'delayed');
       await conversionQueue.clean(0, 'wait');
       await conversionQueue.clean(0, 'active');
@@ -117,6 +110,9 @@ app.get('/output/:videoFile', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+// ❌ Удаляем дублирующийся `app.listen(port, () => {})`
+
+// ✅ Оставляем только ОДИН `app.listen()`
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
 });
