@@ -8,7 +8,7 @@ const path = require('path');
 //    redis: { host: '127.0.0.1', port: 6379 }
 //});
 
-const converionQueue = new Queue('conversionQueue', {
+const conversionQueue = new Queue('conversionQueue', {
   redis: { host: process.env.REDIS_HOST, port: 6379 }
 });
 
