@@ -12,7 +12,6 @@ const videoQueue = new Queue('videoQueue', {
   redis: {
     host: 'red-cXXXXXXXXXXXXX', // Замени на свой хост
     port: 6379,
-    password: 'твой_пароль_если_есть' // Если пароль не указан, удали эту строку
   }
 });
 
